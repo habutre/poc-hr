@@ -1,0 +1,58 @@
+quarkus:
+  log:
+    console:
+      json:
+        pretty-print: true
+        date-format: "YYYY-MM-dd HH:mm:ss"
+        exception-output-type: "detailed-and-formatted"
+
+  # datasource configuration
+  datasource:
+    db-kind: postgresql
+    username: postgres
+    password: wt_password
+    jdbc:
+      url: jdbc:postgresql://localhost:5432/work_tracker #jdbc:postgresql://${DB_HOST}:${DB_PORT:5432}/${DB_NAME}
+    "eventStore":
+      db-kind: postgresql
+      username: postgres
+      password: wt_password
+      jdbc:
+        url: jdbc:postgresql://localhost:5432/axonframework #jdbc:postgresql://${DB_HOST}:${DB_PORT:5432}/${DB_NAME}
+  hibernate-orm:
+    packages: com.acme
+    "eventStore":
+      datasource: eventStore
+      database:
+        generation: drop-and-create
+      packages: org.axonframework.eventsourcing.eventstore.jpa,org.axonframework.eventhandling
+
+
+  # drop and create the database at startup (use `update` to only update the schema)
+  #hibernate-orm.database.generation: drop-and-create
+
+  # https://quarkus.io/guides/cdi-reference#BeanDiscovery
+  index-dependency:
+    axonframework-configuration:
+      group-id: org.axonframework
+      artifact-id: axon-configuration
+    axonframework-cdi:
+      group-id: org.axonframework
+      artifact-id: axon-cdi
+    axonframework-eventsourcing:
+      group-id: org.axonframework
+      artifact-id: axon-eventsourcing
+    axonframework-messaging:
+      group-id: org.axonframework
+      artifact-id: axon-messaging
+
+# Axon config
+# Use JGroups to distribute architecture
+#axon.distributed.enabled: true
+
+## Sample code configs
+display:
+  mach: 3
+  unit:
+    name: "mph"
+    factor: 2.23694

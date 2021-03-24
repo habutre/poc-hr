@@ -1,0 +1,22 @@
+version: "3.9"
+services:
+  postgres:
+    image: postgres:13
+    container_name: wt_postgres
+    environment:
+      POSTGRES_PASSWORD: wt_password
+      #POSTGRES_USER: wt_user
+      POSTGRES_DB: work_tracker
+    ports:
+      - "5432:5432"
+    expose:
+      - "5432"
+    volumes:
+      - "/home/rogerio/data/work_tracker/database:/var/lib/postgresql/data"
+    #healthcheck:
+    #  test: ["CMD", "netstat | grep 5432"]
+    #  interval: 15s
+    #  timeout: 10s
+    #  retries: 3
+    #  start_period: 30s
+    restart: always

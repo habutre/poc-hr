@@ -1,0 +1,62 @@
+plugins {
+    id 'java'
+    id 'io.quarkus'
+}
+
+repositories {
+    mavenLocal()
+    mavenCentral()
+}
+
+dependencies {
+    implementation enforcedPlatform("${quarkusPlatformGroupId}:${quarkusPlatformArtifactId}:${quarkusPlatformVersion}")
+    implementation 'io.quarkus:quarkus-hibernate-orm'
+    implementation 'io.quarkus:quarkus-flyway'
+    implementation 'io.quarkus:quarkus-rest-client-jackson'
+    implementation 'io.quarkus:quarkus-kafka-client'
+    implementation 'io.quarkus:quarkus-config-yaml'
+    implementation 'io.quarkus:quarkus-jackson'
+    implementation 'io.quarkus:quarkus-logging-json'
+    implementation 'io.quarkus:quarkus-resteasy-jackson'
+    implementation 'io.quarkus:quarkus-jdbc-postgresql'
+    implementation 'io.quarkus:quarkus-micrometer'
+    implementation 'io.quarkus:quarkus-arc'
+    implementation 'io.quarkus:quarkus-resteasy'
+    implementation 'io.quarkus:quarkus-hibernate-orm'
+    implementation 'io.quarkus:quarkus-jdbc-postgresql'
+    implementation "org.axonframework:axon-configuration:${axonVersion}"
+    implementation "org.axonframework:axon-messaging:${axonVersion}"
+    implementation "org.axonframework:axon-cdi:4.0-alpha1"
+    testImplementation "io.quarkus:quarkus-junit5"
+    testImplementation "org.hamcrest:hamcrest-core:2.2"
+    testImplementation "org.axonframework:axon-test:${axonVersion}"
+}
+
+group 'com.acmme.poc.hr'
+version '1.0.0-SNAPSHOT'
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_15
+    targetCompatibility = JavaVersion.VERSION_15
+}
+
+compileJava {
+    options.encoding = "UTF-8"
+    options.compilerArgs << "-parameters"
+    options.compilerArgs << "--enable-preview"
+    options.compilerArgs << "-Xlint:preview"
+}
+
+compileTestJava {
+    options.encoding = 'UTF-8'
+    options.compilerArgs << "-parameters"
+    options.compilerArgs << "--enable-preview"
+    options.compilerArgs << "-Xlint:preview"
+}
+
+test {
+    jvmArgs("--enable-preview")
+}
+
+
+

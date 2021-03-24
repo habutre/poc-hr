@@ -1,0 +1,7 @@
+<persistence version="1.0" xmlns="http://java.sun.com/xml/ns/persistence">
+  <persistence-unit name="eventStore" transaction-type="RESOURCE_LOCAL">
+    <class>org.axonframework.eventsourcing.eventstore.jpa.DomainEventEntry</class>
+    <class>org.axonframework.eventsourcing.eventstore.jpa.SnapshotEventEntry</class>
+    <description>Axon Framework persistence</description>
+  </persistence-unit>
+</persistence>
